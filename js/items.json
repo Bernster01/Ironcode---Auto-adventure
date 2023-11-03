@@ -1,0 +1,10 @@
+{
+    "allitems": {
+        "battleaxe": {
+            "name": "Battleaxe",
+            "damage": "1d8",
+            "damageType": "slashing",
+            "image": "assets/images/items/battleaxe.png"
+        }
+    }
+}

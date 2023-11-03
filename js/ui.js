@@ -10,6 +10,27 @@ function uiStarterFunction() {
             container.classList.add("collapsed");
         }
     });
+    document.getElementById("character-selecting-container").addEventListener("click", function (e) {
+        //close if not clicking on a child
+        if (e.target.id == "character-selecting-container") {
+            document.getElementById("character-selecting-container").style.display = "none";
+        }
+    });
+    document.querySelectorAll(".character-portrait").forEach(element => {
+        element.addEventListener("click", function () {
+          document.getElementById("character-selecting-container").style.display = "flex";
+          console.log(document.getElementById("character-selecting-container"));
+          //remove characters from wrapper if they exist in active slots
+            let activeCharacters = document.querySelectorAll(".active-character-container");
+            activeCharacters.forEach(element => {
+                let ownedCharacter = document.getElementById(element.dataset.character+"-owned");
+                if (ownedCharacter) {
+                    ownedCharacter.remove();
+                }
+            });
+        });
+    });
+    
 }
 function loadActiveCharacter(target, character) {
     let container = document.getElementById("character"+target);
@@ -25,7 +46,7 @@ function loadActiveCharacter(target, character) {
     let charisma = document.getElementById("character"+target+"-charisma");
 
     container.style.borderColor = getBorderColorFromRarity(character.rarity);
-
+    container.dataset.character = character.name;
     portrait.src = character.imageSrc;
     portrait.alt = character.imageAlt;
     portrait.title = character.imageTitle;
@@ -55,8 +76,10 @@ function getBorderColorFromRarity(rarity) {
             return "#f7e6c7";
     }
 }
-const ui = {
-    loadActiveCharacter: loadActiveCharacter
-}
+
 document.addEventListener("DOMContentLoaded", uiStarterFunction);
+const ui = {
+    loadActiveCharacter: loadActiveCharacter,
+    getBorderColorFromRarity: getBorderColorFromRarity
+}
 export { ui };

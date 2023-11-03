@@ -1,5 +1,6 @@
 import { characters } from "./basecharacters.js";
 import { ui } from "./ui.js";
+import { player } from "./player.js";
 class character {
     constructor(baseCharacter) {
         this.name = clone(baseCharacter.name);
@@ -56,3 +57,19 @@ ui.loadActiveCharacter(1, rhaazk);
 ui.loadActiveCharacter(2, knut);
 ui.loadActiveCharacter(3, greta);
 ui.loadActiveCharacter(4, leyla);
+player.ownedCharacters.forEach(element => {
+    let newElement = document.createElement("div");
+    newElement.classList.add("character");
+    newElement.style.borderColor = ui.getBorderColorFromRarity(element.rarity);
+    newElement.id = element.name+"-owned";
+    let img = document.createElement("img");
+    img.src = element.imageSrc;
+    img.alt = element.imageAlt;
+    img.title = element.imageTitle;
+    newElement.appendChild(img);
+    let name = document.createElement("h3");
+    name.innerHTML = element.name;
+    newElement.appendChild(name);
+    console.log(newElement);
+    document.getElementById("character-selecting-wrapper").appendChild(newElement);
+});

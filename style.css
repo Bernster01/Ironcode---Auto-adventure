@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+
+html {
+    font-family: 'Ubuntu', sans-serif;
+    background: grey;
+}
+#active-characters-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    width: 70%;
+    bottom: 2.5%;
+    left: 15%;
+    transition: transform 0.5s ease-in-out;
+}
+#active-characters {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.active-character-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    background-color: #ffedcc;
+    border: 0.5em solid white;
+    border-radius: 1em;
+    padding: 1em;
+    box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
+}
+
+.active-character-container .character-portrait {
+    width: 100px;
+    height: 100px;
+    aspect-ratio: 1/1;
+    border: 0.25em solid rgb(255, 226, 112);
+    border-radius: 1em;
+    cursor: pointer;
+}
+
+.active-character-top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 40%;
+    background-color: burlywood;
+    border-radius: 1em;
+    padding: 0.5em;
+
+}
+.active-character-top div{
+    width:55%;
+    padding-left: 1em;
+}
+.active-character-middle {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 10%;
+    width: 100%;
+    border-radius: 1em;
+    padding: 0.5em;
+
+}
+.active-character-middle div{
+    margin: 0.5em;
+    width: 50%;
+}
+.active-character-bottom {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width:100%;
+    height: 50%;
+}
+
+.active-character-bottom div {
+    margin: 0.5em;
+    width: 50%;
+}
+.stats p{
+    margin-top: 0.2em;
+    margin-bottom: 0.5em;
+}
+.collapsed {
+    transform: translateY(90%);
+}

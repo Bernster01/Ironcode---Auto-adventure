@@ -1,3 +1,5 @@
+
+let selectedSlot = 0;
 function uiStarterFunction() {
     document.getElementById("expand-collapse-characters").addEventListener("click", function () {
         let container = document.getElementById("active-characters-wrapper");
@@ -19,11 +21,13 @@ function uiStarterFunction() {
     document.querySelectorAll(".character-portrait").forEach(element => {
         element.addEventListener("click", function () {
           document.getElementById("character-selecting-container").style.display = "flex";
+          selectedSlot = element.dataset.slot;
+          console.log(selectedSlot);
           console.log(document.getElementById("character-selecting-container"));
           //remove characters from wrapper if they exist in active slots
             let activeCharacters = document.querySelectorAll(".active-character-container");
             activeCharacters.forEach(element => {
-                let ownedCharacter = document.getElementById(element.dataset.character+"-owned");
+                let ownedCharacter = document.getElementById(element.dataset.character);
                 if (ownedCharacter) {
                     ownedCharacter.remove();
                 }
@@ -44,7 +48,6 @@ function loadActiveCharacter(target, character) {
     let intelligence = document.getElementById("character"+target+"-intelligence");
     let wisdom = document.getElementById("character"+target+"-wisdom");
     let charisma = document.getElementById("character"+target+"-charisma");
-
     container.style.borderColor = getBorderColorFromRarity(character.rarity);
     container.dataset.character = character.name;
     portrait.src = character.imageSrc;
@@ -82,4 +85,4 @@ const ui = {
     loadActiveCharacter: loadActiveCharacter,
     getBorderColorFromRarity: getBorderColorFromRarity
 }
-export { ui };
+export { ui, selectedSlot };

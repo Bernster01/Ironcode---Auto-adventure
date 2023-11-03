@@ -1,5 +1,5 @@
 import { characters } from "./basecharacters.js";
-import { ui } from "./ui.js";
+import { ui, selectedSlot } from "./ui.js";
 import { player } from "./player.js";
 let gameState= {
     baseIncome: 0,
@@ -12,7 +12,9 @@ let gameState= {
 }
 class character {
     constructor(baseCharacter) {
+        if(!baseCharacter) return;
         this.name = clone(baseCharacter.name);
+        this.blob = clone(baseCharacter.blob);
         this.class = clone(baseCharacter.class);
         this.desc = clone(baseCharacter.desc);
         this.rarity = clone(baseCharacter.rarity);
@@ -38,6 +40,7 @@ class character {
         cha: 10
     };
     name = "Character";
+    blob = "character";
     class = "Class";
     desc = "A character.";
     rarity = "common";
@@ -63,25 +66,18 @@ function startGame(){
 function updateGame(){
     //update buffs
     player.buffs = [];
-    gameState.characters["1"].buffs.forEach(element => {
-        player.buffs.push(element);
-    });
-    gameState.characters["2"].buffs.forEach(element => {
-        player.buffs.push(element);
-    });
-    gameState.characters["3"].buffs.forEach(element => {
-        player.buffs.push(element);
-    });
-    gameState.characters["4"].buffs.forEach(element => {
-        player.buffs.push(element);
-    });
+    for(let i = 1; i < 5; i++){
+        if(gameState.characters[i]){
+            player.buffs = player.buffs.concat(gameState.characters[i].buffs);
+        }
+    }
     //update stats
     //update hp
     //update gold
 }
 function gameTick() {
-    console.log("tick", player.gold);
     generateGold();
+    //recursion
     setTimeout(gameTick, 1000);
 }
 function generateGold() {
@@ -96,37 +92,57 @@ function generateGold() {
     let gold = Math.floor(Math.random() * 10)/9 + gameState.baseIncome;
     gold += goldFlat;
     gold = Math.floor(gold * goldModifier);
-    console.log("generating gold.. Modifer is "+goldModifier+" and flat is "+goldFlat+" and base income is "+gameState.baseIncome+" and gold is "+gold+".");
     player.gold += gold;
 }
 function clone(obj){
     return JSON.parse(JSON.stringify(obj));
 }
-function addCharacter(targerCharacter, targetSlot){
-    console.log(gameState.characters);
-    let newCharacter = new character(targerCharacter);
+function addCharacter(targetCharacter, targetSlot){
+    let newCharacter = new character(targetCharacter);
+    console.log(targetCharacter,"newCharacter");
     gameState.characters[targetSlot] = newCharacter;
     gameState.baseIncome+=1;
     ui.loadActiveCharacter(targetSlot, newCharacter);
+    updateGame();
+}
+function removeCharacter(targetSlot){
+    gameState.characters[targetSlot] = null;
+    gameState.baseIncome-=1;
+    ui.loadActiveCharacter(targetSlot, new character());
+}
+function loadOwnedCharacters(){
+    player.ownedCharacters.forEach(element => {
+        let newElement = document.createElement("div");
+        newElement.classList.add("character");
+        newElement.style.borderColor = ui.getBorderColorFromRarity(element.rarity);
+        newElement.id = element.name;
+        let img = document.createElement("img");
+        img.src = element.imageSrc;
+        img.alt = element.imageAlt;
+        img.title = element.imageTitle;
+        img.dataset.character = element.blob;
+        newElement.appendChild(img);
+        let name = document.createElement("h3");
+        name.innerHTML = element.name;
+        newElement.appendChild(name);
+        console.log(newElement);
+        newElement.addEventListener("click", function (e) {
+            let targetCharacter = e.target.dataset.character;
+            //tolowercase
+            targetCharacter = targetCharacter.toLowerCase();
+            console.log(targetCharacter,"click");
+            removeCharacter(selectedSlot);
+            addCharacter(characters[targetCharacter], selectedSlot);
+            document.getElementById("character-selecting-container").style.display = "none";
+            document.getElementById("character-selecting-wrapper").innerHTML = "";
+            loadOwnedCharacters();
+        });
+        document.getElementById("character-selecting-wrapper").appendChild(newElement);
+    });
 }
 addCharacter(characters.rhaazk, 1);
 addCharacter(characters.knut, 2);
 addCharacter(characters.greta, 3);
 addCharacter(characters.squire, 4);
-player.ownedCharacters.forEach(element => {
-    let newElement = document.createElement("div");
-    newElement.classList.add("character");
-    newElement.style.borderColor = ui.getBorderColorFromRarity(element.rarity);
-    newElement.id = element.name+"-owned";
-    let img = document.createElement("img");
-    img.src = element.imageSrc;
-    img.alt = element.imageAlt;
-    img.title = element.imageTitle;
-    newElement.appendChild(img);
-    let name = document.createElement("h3");
-    name.innerHTML = element.name;
-    newElement.appendChild(name);
-    console.log(newElement);
-    document.getElementById("character-selecting-wrapper").appendChild(newElement);
-});
+loadOwnedCharacters();
 startGame();

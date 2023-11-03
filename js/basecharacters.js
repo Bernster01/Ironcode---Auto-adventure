@@ -1,5 +1,6 @@
 const rhaazk ={
     name: 'Rhaazk',
+    blob: 'rhaazk',
     class: 'Fighter',
     desc: 'A lizardfolk fighter with a strong sense of justice and a penchant for violence.',
     rarity: 'legendary',
@@ -25,6 +26,7 @@ const rhaazk ={
 }
 const knut ={
     name: 'Knut',
+    blob: 'knut',
     class: 'Rouge',
     desc: 'A halfling that suffers from kleptomaniac.',
     rarity: 'legendary',
@@ -52,6 +54,7 @@ const knut ={
 }
 const greta ={
     name: 'Greta Rockhard',
+    blob: 'greta',
     class: 'cleric',
     desc: 'A dwarven cleric that is a bit too fond of her ale and she or he are very ugly.',
     rarity: 'legendary',
@@ -77,6 +80,7 @@ const greta ={
 }
 const gandulf ={
     name: 'Gandulf GW Olofsson',
+    blob: 'gandulf',
     class: 'Wizard',
     desc: 'A human wizard. ',
     rarity: 'legendary',
@@ -102,6 +106,7 @@ const gandulf ={
 }
 const benbrytaren ={
     name: 'Benbrytaren',
+    blob: 'benbrytaren',
     class: 'Barbarian',
     desc: 'A human barbarian. ',
     rarity: 'legendary',
@@ -127,6 +132,7 @@ const benbrytaren ={
 }
 const tyr ={
     name: 'Tyr',
+    blob: 'tyr',
     class: 'Paladin',
     desc: 'A human paladin. ',
     rarity: 'legendary',
@@ -152,6 +158,7 @@ const tyr ={
 }
 const morningwood ={
     name: 'Morningwood',
+    blob: 'morningwood',
     class: 'ranger',
     desc: 'A human ranger. ',
     rarity: 'legendary',
@@ -177,6 +184,7 @@ const morningwood ={
 }
 const leyla ={
     name: 'Leyla',
+    blob: 'leyla',
     class: 'Sorcerer',
     desc: 'A human sorcerer. ',
     rarity: 'mythic',
@@ -203,6 +211,7 @@ const leyla ={
 }
 const squire= {
     name: 'squire',
+    blob: 'squire',
     class: 'Fighter',
     desc: 'A soldier.',
     rarity: 'common',

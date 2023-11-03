@@ -17,6 +17,7 @@ const rhaazk ={
         wis: 8,
         cha: 12
     },
+    buffs: [],
     weapon: "battleaxe",
     armor: "halfplate",
     trinket: "none",
@@ -41,6 +42,9 @@ const knut ={
         wis: 10,
         cha: 14
     },
+    buffs: [
+        { type: "gold", modifier: 1, flat: 5 }
+    ],
     weapon: "rapier",
     armor: "leather",
     trinket: "none",
@@ -65,6 +69,7 @@ const greta ={
         wis: 16,
         cha: 12
     },
+    buffs: [],
     weapon: "warhammer",
     armor: "chainmail",
     trinket: "none",
@@ -89,6 +94,7 @@ const gandulf ={
         wis: 10,
         cha: 13
     },
+    buffs: [],
     weapon: "quarterstaff",
     armor: "none",
     trinket: "none",
@@ -113,6 +119,7 @@ const benbrytaren ={
         wis: 12,
         cha: 8
     },
+    buffs: [{type: "gold", modifier: -0.25, flat: -1}],
     weapon: "greataxe",
     armor: "none",
     trinket: "none",
@@ -137,6 +144,7 @@ const tyr ={
         wis: 8,
         cha: 16
     },
+    buffs: [],
     weapon: "longsword",
     armor: "chainmail",
     trinket: "none",
@@ -161,6 +169,7 @@ const morningwood ={
         wis: 13,
         cha: 8
     },
+    buffs: [],
     weapon: "longbow",
     armor: "leather",
     trinket: "none",
@@ -185,10 +194,37 @@ const leyla ={
         wis: 13,
         cha: 19
     },
+    buffs: [],
     weapon: "indomitable odachi",
     armor: "chainmail",
     trinket: "none",
     offhand: "sword of unsealing"
+
+}
+const squire= {
+    name: 'squire',
+    class: 'Fighter',
+    desc: 'A soldier.',
+    rarity: 'common',
+    level: 1,
+    baseHp: 10,
+    imageSrc: 'assets/images/characters/squire.png',
+    imageAlt: 'Soldier',
+    imageTitle: 'Soldier',
+    lore: "test",
+    stats: {
+        str: 10,
+        dex: 10,
+        con: 10,
+        int: 10,
+        wis: 10,
+        cha: 10
+    },
+    buffs: [{type: "gold", modifier: 0.1, flat: 1}],
+    weapon: "longsword",
+    armor: "leather",
+    trinket: "none",
+    offhand: "shield"
 
 }
 const characters = {
@@ -199,10 +235,11 @@ const characters = {
     gandulf: gandulf,
     benbrytaren: benbrytaren,
     tyr: tyr,
-    morningwood: morningwood
+    morningwood: morningwood,
+    squire: squire
 }
 const commonCharacters = {
-
+    squire: squire
 }
 const rareCharacters = {
 }

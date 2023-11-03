@@ -73,7 +73,7 @@ const greta ={
 const leyla ={
     name: 'Leyla',
     class: 'Sorcerer',
-    desc: 'A human sorcerer that host a primordal god inside.',
+    desc: 'A human sorcerer. ',
     rarity: 'mythic',
     level: 1,
     baseHp: 8,
